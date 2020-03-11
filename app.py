@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -11,13 +11,9 @@ migrate = Migrate(app, db)
 
 from models import Result
 
-@app.route('/')
-def hello() -> str:
-    return "Hello World"
-
-@app.route('/<name>')
-def hello_name(name: str) -> str:
-    return "Hello {}!".format(name)
+@app.route('/', methods=['GET', 'POST'])
+def index() -> str:
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()
